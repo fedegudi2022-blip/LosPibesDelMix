@@ -5,64 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Los Pibes del Mix</title>
   <style>
+    /* Fuente gamer estilo retro */
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Press Start 2P', cursive;
       margin: 0;
-      background: #0f172a;
+      background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
+      background-size: 300% 300%;
+      animation: gradientBG 12s ease infinite;
       color: #f1f5f9;
       text-align: center;
     }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
     header {
-      padding: 2rem;
-      background: #1e293b;
+      padding: 3rem 1rem;
+      background: rgba(30, 41, 59, 0.8);
+      box-shadow: 0 0 20px #00f7ff;
     }
+
     h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       margin: 0;
+      color: #00f7ff;
+      text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
     }
+
     p {
-      margin: 0.5rem 0 2rem;
+      margin: 1rem 0 2rem;
+      font-size: 0.9rem;
     }
+
     section {
-      padding: 2rem;
+      padding: 2rem 1rem;
     }
+
+    h2 {
+      font-size: 1.2rem;
+      color: #ff00ff;
+      text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+      margin-bottom: 1.5rem;
+    }
+
     a.button {
       display: inline-block;
       margin: 1rem;
       padding: 1rem 2rem;
-      background: #3b82f6;
-      color: white;
+      background: #111;
+      border: 2px solid #00f7ff;
+      color: #00f7ff;
       text-decoration: none;
-      border-radius: 8px;
-      transition: background 0.3s;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #00f7ff;
     }
+
     a.button:hover {
-      background: #2563eb;
+      background: #00f7ff;
+      color: #111;
+      box-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff;
+      transform: scale(1.05);
     }
+
     footer {
-      background: #1e293b;
-      padding: 1rem;
+      background: rgba(30, 41, 59, 0.8);
+      padding: 1.5rem;
       margin-top: 2rem;
+      font-size: 0.7rem;
+      color: #94a3b8;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>🔥 Los Pibes del Mix 🔥</h1>
-    <p>Comunidad gamer en Discord, WhatsApp y más</p>
+    <p>La comunidad gamer más piola en Discord y WhatsApp</p>
   </header>
 
   <section>
     <h2>Conéctate con nosotros</h2>
-    <a href="/https://discord.gg/AUNvapeBmt" class="button">🎮 Discord</a>
+    <a href="https://dsc.gg/lospibesdelmix" class="button">🎮 Discord</a>
     <a href="https://chat.whatsapp.com/BcMn2pej5J3J6xH1voaoEB?mode=ems_copy_t" class="button">💬 WhatsApp</a>
   </section>
 
   <section>
     <h2>¿Qué es Los Pibes del Mix?</h2>
     <p>
-      Somos una comunidad de amigos y jugadores que compartimos
-      buenos momentos en juegos como Counter Strike, Minecraft, L4D2 y más.
+      Somos una comunidad de amigos y jugadores que compartimos<br>
+      buenos momentos en juegos como <b>Counter Strike</b>, <b>Minecraft</b>, <b>L4D2</b> y mucho más.  
+      Unite y sé parte de la banda. 🚀
     </p>
   </section>
 
