@@ -44,6 +44,7 @@ nav#sidebar a {
   padding:0.8rem 0; margin:0.5rem 0; border-radius:6px; position:relative;
   transition: all 0.3s ease;
   cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:5px;
 }
 body.light-mode nav#sidebar a { color: var(--text-light); }
 
@@ -54,7 +55,6 @@ nav#sidebar a::after {
 body.light-mode nav#sidebar a::after { background: var(--primary-light); }
 
 nav#sidebar a:hover::after, nav#sidebar a.active::after { width:100%; }
-
 nav#sidebar a.active { font-weight:700; }
 
 /* Toggle Button */
@@ -91,10 +91,10 @@ body.light-mode footer { background:var(--sec-light); color:var(--text-light); }
 
 <nav id="sidebar">
   <h1>Los Pibes del Mix</h1>
-  <a onclick="scrollToSection('inicio')" class="active">Inicio</a>
-  <a onclick="scrollToSection('servidores')">Servidores</a>
-  <a onclick="scrollToSection('anuncios')">Anuncios</a>
-  <a onclick="scrollToSection('reglas')">Reglas</a>
+  <a href="#inicio" class="active"><span>🏠</span>Inicio</a>
+  <a href="#servidores"><span>🖥️</span>Servidores</a>
+  <a href="#anuncios"><span>📢</span>Anuncios</a>
+  <a href="#reglas"><span>📜</span>Reglas</a>
   <button id="toggleModeBtn" class="toggle-btn dark" onclick="toggleMode()">Modo</button>
 </nav>
 
@@ -104,8 +104,8 @@ body.light-mode footer { background:var(--sec-light); color:var(--text-light); }
   <p>Únete a nuestra comunidad gamer y disfruta de Counter Strike, Minecraft, L4D2 y más.</p>
   <p>Conéctate en nuestras redes sociales:</p>
   <div style="display:flex; gap:1rem;">
-    <a href="https://dsc.gg/lospibesdelmix" target="_blank">Discord</a>
-    <a href="https://www.instagram.com/lospibesdelmixcs/" target="_blank">Instagram</a>
+    <a href="https://dsc.gg/lospibesdelmix" target="_blank">💬 Discord</a>
+    <a href="https://www.instagram.com/lospibesdelmixcs/" target="_blank">📸 Instagram</a>
   </div>
 </section>
 
@@ -134,26 +134,28 @@ body.light-mode footer { background:var(--sec-light); color:var(--text-light); }
 <footer>© 2025 Los Pibes del Mix</footer>
 
 <script>
-// Scroll bloqueado, solo cambio con click
-function scrollToSection(id){
-  const section=document.getElementById(id);
-  if(section){
-    section.scrollIntoView({behavior:'smooth'});
-    document.querySelectorAll('#sidebar a').forEach(a=>a.classList.remove('active'));
-    document.querySelector(`#sidebar a[onclick="scrollToSection('${id}')"]`).classList.add('active');
-  }
-}
+// Scroll bloqueado: solo click en enlaces
+document.querySelectorAll('#sidebar a').forEach(link=>{
+  link.addEventListener('click', e=>{
+    e.preventDefault();
+    const targetId = link.getAttribute('href').replace('#','');
+    const section = document.getElementById(targetId);
+    if(section){
+      section.scrollIntoView({behavior:'smooth'});
+      document.querySelectorAll('#sidebar a').forEach(a=>a.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
+});
 
 // Toggle Dark/Light Mode con cambio de color del botón
 const toggleBtn=document.getElementById('toggleModeBtn');
 function toggleMode(){
   document.body.classList.toggle('light-mode');
   if(document.body.classList.contains('light-mode')){
-    toggleBtn.classList.remove('dark');
-    toggleBtn.classList.add('light');
-  } else{
-    toggleBtn.classList.remove('light');
-    toggleBtn.classList.add('dark');
+    toggleBtn.classList.remove('dark'); toggleBtn.classList.add('light');
+  }else{
+    toggleBtn.classList.remove('light'); toggleBtn.classList.add('dark');
   }
   localStorage.setItem('theme',document.body.classList.contains('light-mode')?'light':'dark');
 }
@@ -161,13 +163,12 @@ function toggleMode(){
 // Mantener tema guardado
 if(localStorage.getItem('theme')==='light'){
   document.body.classList.add('light-mode');
-  toggleBtn.classList.remove('dark');
-  toggleBtn.classList.add('light');
+  toggleBtn.classList.remove('dark'); toggleBtn.classList.add('light');
 } else{
-  toggleBtn.classList.remove('light');
-  toggleBtn.classList.add('dark');
+  toggleBtn.classList.remove('light'); toggleBtn.classList.add('dark');
 }
 </script>
 
 </body>
 </html>
+
