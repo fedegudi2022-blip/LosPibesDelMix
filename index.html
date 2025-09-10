@@ -7,52 +7,34 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-* {
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
+* { box-sizing: border-box; scroll-behavior: smooth; }
 
 body {
   font-family: 'Press Start 2P', cursive;
   margin: 0;
-  background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
-  background-size: 300% 300%;
-  animation: gradientBG 15s ease infinite;
-  color: #f1f5f9;
   text-align: center;
-}
-
-@keyframes gradientBG {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
+  background: #0d1117;
+  color: #c9d1d9;
+  transition: all 0.5s;
 }
 
 header {
   padding: 2rem 1rem 1rem 1rem;
-  background: #1e293b;
-  box-shadow: 0 0 15px rgba(0, 247, 255, 0.3);
+  background: #161b22;
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.3);
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-h1 {
-  font-size: 2rem;
-  margin: 0;
-  color: #38bdf8;
-  text-shadow: 0 0 6px #38bdf8;
-}
+h1 { font-size: 2rem; color: #00f7ff; text-shadow: 0 0 6px #00f7ff; }
 
-nav {
-  margin-top: 1rem;
-}
-
+nav { margin-top: 1rem; }
 nav a {
   display: inline-block;
   margin: 0.3rem 0.5rem;
   padding: 0.5rem 1rem;
-  color: #38bdf8;
+  color: #00f7ff;
   background: #111;
   border-radius: 8px;
   text-decoration: none;
@@ -60,32 +42,24 @@ nav a {
   transition: 0.3s;
   box-shadow: 0 0 5px #00f7ff;
 }
+nav a:hover { background: #00f7ff; color: #111; transform: scale(1.05); box-shadow: 0 0 10px #00f7ff; }
 
-nav a:hover {
-  background: #38bdf8;
-  color: #111;
-  transform: scale(1.05);
-  box-shadow: 0 0 10px #00f7ff;
-}
+section { padding: 2rem 1rem; min-height: 100vh; }
 
-section {
-  padding: 2rem 1rem;
-}
-
-section h2 {
+h2 {
   font-size: 1rem;
-  color: #f472b6;
-  text-shadow: 0 0 4px #f472b6;
+  color: #ff77ff;
+  text-shadow: 0 0 4px #ff77ff;
   margin-bottom: 1.2rem;
   position: relative;
 }
 
-section h2::after {
+h2::after {
   content: '';
   display: block;
-  width: 80px;
+  width: 60px;
   height: 2px;
-  background: #38bdf8;
+  background: #00f7ff;
   margin: 6px auto 0 auto;
   border-radius: 2px;
 }
@@ -95,79 +69,77 @@ a.button {
   margin: 0.8rem;
   padding: 0.8rem 1.5rem;
   background: #111;
-  border: 2px solid #38bdf8;
-  color: #38bdf8;
+  border: 2px solid #00f7ff;
+  color: #00f7ff;
   text-decoration: none;
   border-radius: 10px;
   font-size: 0.8rem;
   transition: all 0.3s ease;
   box-shadow: 0 0 10px #00f7ff;
 }
-
-a.button:hover {
-  background: #38bdf8;
-  color: #111;
-  box-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff;
-  transform: scale(1.05);
-}
+a.button:hover { background: #00f7ff; color: #111; transform: scale(1.05); box-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff; }
 
 .card {
-  background: #1e293b;
+  background: #161b22;
   border-radius: 12px;
   padding: 1rem;
   margin: 1rem auto;
   max-width: 500px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  box-shadow: 0 0 10px rgba(0,255,255,0.4);
   text-align: left;
   transition: transform 0.3s;
 }
-
-.card:hover {
-  transform: scale(1.02);
-}
-
-.card h3 {
-  margin: 0 0 0.5rem;
-  color: #38bdf8;
-  font-size: 0.9rem;
-}
-
-.card p {
-  margin: 0.3rem 0;
-  font-size: 0.8rem;
-  color: #e2e8f0;
-}
+.card:hover { transform: scale(1.02); }
+.card h3 { margin: 0 0 0.5rem; color: #00f7ff; font-size: 0.9rem; }
+.card p { margin: 0.3rem 0; font-size: 0.8rem; color: #c9d1d9; }
 
 footer {
-  background: #1e293b;
+  background: #161b22;
   padding: 1rem;
-  margin-top: 2rem;
   font-size: 0.65rem;
   color: #94a3b8;
-  text-align: center;
 }
 
-/* Smooth scroll anchor offset */
-:target::before {
-  content: "";
-  display: block;
-  height: 90px;
-  margin-top: -90px;
-  visibility: hidden;
+.toggle-btn {
+  display: inline-block;
+  margin: 0.8rem;
+  padding: 0.5rem 1rem;
+  background: #00f7ff;
+  color: #111;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: 0.3s;
 }
+.toggle-btn:hover { background: #38bdf8; }
+
+body.light-mode {
+  background: #f5f5f5;
+  color: #111;
+}
+body.light-mode header { background: #d1d5db; box-shadow: 0 0 15px rgba(0,0,0,0.2); }
+body.light-mode h1 { color: #2563eb; text-shadow: none; }
+body.light-mode nav a { color: #2563eb; background: #e5e7eb; box-shadow: none; }
+body.light-mode nav a:hover { background: #2563eb; color: #fff; box-shadow: none; }
+body.light-mode .card { background: #e5e7eb; color: #111; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
+body.light-mode a.button { border: 2px solid #2563eb; color: #2563eb; background: #fff; }
+body.light-mode a.button:hover { background: #2563eb; color: #fff; }
+body.light-mode footer { background: #d1d5db; color: #444; }
+
 </style>
 </head>
 <body>
 
 <header>
-  <h1>🌐 Los Pibes del Mix 🌐</h1>
-  <p>La comunidad gamer más piola en Discord, Instagram y más</p>
-  <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#servidores">Servidores</a>
-    <a href="#anuncios">Anuncios</a>
-    <a href="#reglas">Reglas</a>
-  </nav>
+<h1>🌐 Los Pibes del Mix 🌐</h1>
+<p>La comunidad gamer más piola en Discord, Instagram y más</p>
+<nav>
+  <a href="#inicio">Inicio</a>
+  <a href="#servidores">Servidores</a>
+  <a href="#anuncios">Anuncios</a>
+  <a href="#reglas">Reglas</a>
+</nav>
+<button class="toggle-btn" onclick="toggleMode()">🌙 Oscuro/Claro</button>
 </header>
 
 <section id="inicio">
@@ -178,17 +150,14 @@ footer {
 
 <section id="servidores">
   <h2>🌍 Servidores de Juegos</h2>
-
   <div class="card">
     <h3>🎮 Counter Strike (MIX)</h3>
     <p>IP: <b>45.235.98.42:27023</b></p>
   </div>
-
   <div class="card">
     <h3>🟩 Minecraft Server</h3>
     <p>IP: <b>lospibesdelmix.mcserver.io</b></p>
   </div>
-
   <div class="card">
     <h3>🧟 Left 4 Dead 2</h3>
     <p>Servidor exclusivo de la comunidad</p>
@@ -222,8 +191,27 @@ footer {
 </section>
 
 <footer>
-  <p>© 2025 Los Pibes del Mix | Comunidad Gamer</p>
+<p>© 2025 Los Pibes del Mix | Comunidad Gamer</p>
 </footer>
+
+<script>
+function toggleMode() {
+  document.body.classList.toggle('light-mode');
+  // Guardar el modo en localStorage
+  if(document.body.classList.contains('light-mode')){
+    localStorage.setItem('theme', 'light');
+  } else {
+    localStorage.setItem('theme', 'dark');
+  }
+}
+// Cargar modo guardado
+if(localStorage.getItem('theme') === 'light'){
+  document.body.classList.add('light-mode');
+}
+</script>
+</body>
+</html>
+
 
 </body>
 </html>
