@@ -79,10 +79,28 @@ section.visible { opacity:1; transform: translateY(0) scale(1); }
 .card {
     background: var(--sec-dark); color: var(--text-dark); border-radius: 12px;
     padding:1.5rem; margin:1rem auto; max-width:520px; box-shadow:0 4px 12px rgba(0,200,255,0.3);
-    transition: all 0.5s ease;
+    transition: all 0.5s ease; position: relative;
 }
 body.light-mode .card { background: var(--sec-light); color: var(--text-light); box-shadow:0 4px 12px rgba(0,0,0,0.1); }
 .card:hover { transform: scale(1.02); box-shadow:0 6px 20px rgba(0,200,255,0.5); }
+
+/* Copy Button */
+.copy-btn {
+    margin-top: 0.5rem; padding: 0.4rem 1rem; border: none; border-radius: 6px; cursor: pointer;
+    font-weight: 600; background: var(--primary-dark); color: #111; transition: all 0.3s ease;
+}
+.copy-btn:hover { opacity: 0.8; }
+body.light-mode .copy-btn { background: var(--primary-light); color:#fff; }
+
+/* Copy message */
+.copy-message {
+    position: absolute; bottom: 10px; right: 10px;
+    background: var(--accent-dark); color: #fff;
+    padding: 0.2rem 0.6rem; border-radius: 6px;
+    font-size: 0.75rem; opacity: 0; transition: opacity 0.4s ease;
+}
+body.light-mode .copy-message { background: var(--accent-light); }
+.copy-message.show { opacity: 1; }
 
 /* Buttons */
 .button-group { display:flex; gap:1rem; margin-top:1rem; flex-wrap: wrap; }
@@ -129,7 +147,8 @@ body.light-mode footer { background: var(--sec-light); color:#444; }
 <main>
 <section id="inicio">
     <h2>Bienvenidos</h2>
-    <p>Únete a nuestra comunidad gamer y vive experiencias épicas.</p>
+    <p>Únete a nuestra comunidad gamer y vive momentos divertidos.</p>
+    <p>(Estaremos Actualizando todo de a poco)</p>
     <div class="button-group">
         <a href="https://dsc.gg/lospibesdelmix" class="button" target="_blank">Discord</a>
         <a href="https://www.instagram.com/lospibesdelmixcs/" class="button" target="_blank">Instagram</a>
@@ -138,8 +157,18 @@ body.light-mode footer { background: var(--sec-light); color:#444; }
 
 <section id="servidores">
     <h2>Servidores</h2>
-    <div class="card"><h3>Counter Strike</h3><p>IP: <b>45.235.98.42:27023</b></p></div>
-    <div class="card"><h3>Minecraft</h3><p>IP: <b>lospibesdelmix.mcserver.io</b></p></div>
+    <div class="card">
+        <h3>Counter Strike</h3>
+        <p>IP: <b id="cs-ip">45.235.98.42:27023</b></p>
+        <button class="copy-btn" onclick="copyToClipboard('cs-ip', this)">Copiar IP</button>
+        <span class="copy-message">¡Copiado!</span>
+    </div>
+    <div class="card">
+        <h3>Minecraft</h3>
+        <p>IP: <b id="mc-ip">lospibesdelmix.mcserver.io</b></p>
+        <button class="copy-btn" onclick="copyToClipboard('mc-ip', this)">Copiar IP</button>
+        <span class="copy-message">¡Copiado!</span>
+    </div>
 </section>
 
 <section id="anuncios">
@@ -221,6 +250,17 @@ function loadParticles(){
         }
     });
 }
+
+// Copiar IP al portapapeles
+function copyToClipboard(id, btn){
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(()=>{
+        const msg = btn.nextElementSibling;
+        msg.classList.add("show");
+        setTimeout(()=> msg.classList.remove("show"), 1500);
+    });
+}
 </script>
 </body>
 </html>
+
