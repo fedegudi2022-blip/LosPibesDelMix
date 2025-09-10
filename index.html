@@ -6,145 +6,96 @@
 <title>Los Pibes del Mix</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; scroll-behavior: smooth; margin:0; padding:0; }
+/* =================== RESET =================== */
+* { box-sizing:border-box; margin:0; padding:0; scroll-behavior: smooth; font-family: 'Press Start 2P', cursive; }
+a { text-decoration:none; }
+img { max-width:100%; }
 
+/* =================== BODY =================== */
 body {
-  font-family: 'Press Start 2P', cursive;
   background: #0a0f1a;
   color: #e0e7ff;
-  transition: all 0.5s;
+  transition: all 0.8s ease;
 }
 
-a { text-decoration: none; }
-
-header {
-  display: none; /* quitamos el header superior */
-}
-
+/* =================== SIDEBAR =================== */
 nav#sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 100%;
-  background: #101526;
-  box-shadow: 2px 0 12px rgba(0,255,255,0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem 1rem;
-  transition: all 0.3s;
-  z-index: 1000;
+  position: fixed; top:0; left:0; width:220px; height:100%;
+  background:#101526; box-shadow:2px 0 12px rgba(0,255,255,0.2);
+  display:flex; flex-direction:column; align-items:center; padding:2rem 1rem; z-index:1000;
 }
-
 nav#sidebar h1 {
-  color: #00fff7;
-  text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  text-shadow: 0 0 8px #00fff7;
+  color:#00fff7; font-size:1.5rem; margin-bottom:2rem; text-align:center; text-shadow:0 0 8px #00fff7;
 }
-
 nav#sidebar a {
-  color: #00fff7;
-  padding: 0.8rem 1rem;
-  margin: 0.5rem 0;
-  border-radius: 8px;
-  width: 100%;
-  text-align: center;
-  transition: all 0.3s;
-  box-shadow: 0 0 5px #00fff7;
+  color:#00fff7; padding:0.8rem 1rem; margin:0.5rem 0; border-radius:8px; width:100%;
+  text-align:center; transition: all 0.3s; box-shadow:0 0 5px #00fff7;
 }
-
 nav#sidebar a.active, nav#sidebar a:hover {
-  background: #00fff7;
-  color: #111;
-  transform: scale(1.05);
-  box-shadow: 0 0 15px #00fff7, 0 0 30px #00fff7;
+  background:#00fff7; color:#111; transform:scale(1.05);
+  box-shadow:0 0 15px #00fff7, 0 0 30px #00fff7;
 }
 
+/* Toggle button */
 .toggle-btn {
-  margin-top: 2rem;
-  padding: 0.5rem;
-  background: #00fff7;
-  color: #111;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.7rem;
+  margin-top:2rem; padding:0.5rem 1rem; background:#00fff7; color:#111;
+  border-radius:8px; cursor:pointer; font-size:0.7rem; position:relative; overflow:hidden; transition: all 0.5s ease;
 }
+.toggle-btn::after { content:'🌙 / ☀️'; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); opacity:0; transition: opacity 0.5s ease; }
+.toggle-btn.changed::after { opacity:1; }
 
-main {
-  margin-left: 220px;
-  padding: 2rem;
-}
+/* =================== MAIN =================== */
+main { margin-left:220px; padding:2rem; transition: all 0.5s ease; }
 
+/* Sections */
 section {
-  min-height: 100vh;
-  padding: 4rem 2rem;
-  scroll-margin-top: 0px;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease-out;
+  min-height:100vh; padding:4rem 2rem;
+  scroll-margin-top:30px;
+  opacity:0; transform:translateY(40px); transition: all 0.8s ease-out;
 }
+section.visible { opacity:1; transform:translateY(0); }
 
-section.visible { opacity: 1; transform: translateY(0); }
+/* Headings */
+h2 { font-size:2rem; color:#ff77ff; margin-bottom:1rem; text-shadow:0 0 5px #ff77ff; position:relative; }
+h2::after { content:''; display:block; width:70px; height:3px; background:#00fff7; margin:8px auto 0 auto; border-radius:3px; }
 
-h2 {
-  font-size: 2rem;
-  color: #ff77ff;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 5px #ff77ff;
-  position: relative;
-}
-h2::after {
-  content: '';
-  display: block;
-  width: 70px;
-  height: 3px;
-  background: #00fff7;
-  margin: 8px auto 0 auto;
-  border-radius: 3px;
-}
-
+/* Cards */
 .card {
-  background: #101526;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1rem auto;
-  max-width: 520px;
-  text-align: left;
-  box-shadow: 0 4px 15px rgba(0,255,255,0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
-  opacity: 0;
-  transform: translateY(50px);
+  background:#101526; border-radius:12px; padding:1.5rem; margin:1rem auto; max-width:520px;
+  text-align:left; box-shadow:0 4px 15px rgba(0,255,255,0.3); transition: transform 0.3s, box-shadow 0.3s;
+  opacity:0; transform:translateY(50px);
 }
-.card.visible { opacity: 1; transform: translateY(0); }
-.card:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,255,255,0.5); }
+.card.visible { opacity:1; transform:translateY(0); }
+.card:hover { transform:scale(1.03); box-shadow:0 8px 20px rgba(0,255,255,0.5); }
+.card h3 { color:#00fff7; margin-bottom:0.5rem; font-size:1rem; }
+.card p { font-size:0.8rem; color:#c9d1d9; margin-bottom:0.4rem; line-height:1.3; }
 
-.card h3 { color: #00fff7; margin-bottom: 0.5rem; font-size: 1rem; }
-.card p { font-size: 0.8rem; color: #c9d1d9; margin-bottom:0.4rem; line-height:1.3; }
-
-footer {
-  background: #101526;
-  padding: 1rem;
-  font-size: 0.65rem;
-  color: #94a3b8;
-  text-align: center;
-  margin-top: 2rem;
+/* Buttons */
+.button {
+  display:inline-flex; align-items:center; justify-content:center; gap:0.5rem;
+  margin:0.5rem; padding:0.8rem 1.5rem; font-size:0.9rem; border-radius:10px;
+  border:2px solid #00fff7; color:#00fff7; background:#111; box-shadow:0 0 10px #00fff7; transition: all 0.3s ease;
 }
+.button:hover { background:#00fff7; color:#111; transform:scale(1.05); box-shadow:0 0 20px #00fff7, 0 0 40px #00fff7; }
+.button img { width:20px; height:20px; }
 
-/* LIGHT MODE */
+/* Footer */
+footer { background:#101526; padding:1rem; font-size:0.65rem; color:#94a3b8; text-align:center; margin-top:2rem; }
+
+/* =================== LIGHT MODE =================== */
 body.light-mode {
-  background: #f0f4f8;
-  color: #111;
+  background:#f0f4f8; color:#111;
 }
-body.light-mode nav#sidebar { background: #ffffff; box-shadow: 2px 0 12px rgba(0,0,0,0.15); }
-body.light-mode nav#sidebar h1 { color: #2563eb; text-shadow: none; }
-body.light-mode nav#sidebar a { color: #2563eb; background: #e5e7eb; box-shadow: none; }
-body.light-mode nav#sidebar a.active, body.light-mode nav#sidebar a:hover { background: #2563eb; color: #fff; }
-body.light-mode .card { background: #ffffff; color: #111; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-body.light-mode .card h3 { color: #2563eb; }
-body.light-mode footer { background: #e5e7eb; color: #444; }
+body.light-mode nav#sidebar { background:#ffffff; box-shadow:2px 0 12px rgba(0,0,0,0.15); }
+body.light-mode nav#sidebar h1 { color:#2563eb; text-shadow:none; }
+body.light-mode nav#sidebar a { color:#2563eb; background:#e5e7eb; box-shadow:none; }
+body.light-mode nav#sidebar a.active, body.light-mode nav#sidebar a:hover { background:#2563eb; color:#fff; }
+body.light-mode .card { background:#ffffff; color:#111; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+body.light-mode .card h3 { color:#2563eb; }
+body.light-mode .button { border:2px solid #2563eb; color:#2563eb; background:#fff; }
+body.light-mode .button:hover { background:#2563eb; color:#fff; }
+body.light-mode footer { background:#e5e7eb; color:#444; }
+
 </style>
 </head>
 <body>
@@ -155,67 +106,52 @@ body.light-mode footer { background: #e5e7eb; color: #444; }
 <a href="#servidores">Servidores</a>
 <a href="#anuncios">Anuncios</a>
 <a href="#reglas">Reglas</a>
-<button class="toggle-btn" onclick="toggleMode()">🌙 Oscuro/Claro</button>
+<a href="#noticias">Noticias</a>
+<a href="#galeria">Galería</a>
+<button class="toggle-btn" id="toggleModeBtn" onclick="toggleMode()">🌙 / ☀️</button>
 </nav>
 
 <main>
 <section id="inicio">
-  <h2>🎮 Bienvenidos</h2>
-  <p>Únete a nuestra comunidad de gamers, participa en eventos y conoce amigos con tus mismos juegos favoritos.</p>
-  <a href="https://dsc.gg/lospibesdelmix" class="button" target="_blank">🎮 Discord</a>
-  <a href="https://www.instagram.com/lospibesdelmixcs/?utm_source=ig_web_button_share_sheet" class="button" target="_blank">📷 Instagram</a>
+<h2>🎮 Bienvenidos</h2>
+<p>Únete a nuestra comunidad de gamers, participa en eventos y conoce amigos con tus mismos juegos favoritos.</p>
+<a href="https://dsc.gg/lospibesdelmix" class="button" target="_blank"><img src="https://img.icons8.com/color/48/000000/discord-logo.png"/> Discord</a>
+<a href="https://www.instagram.com/lospibesdelmixcs/?utm_source=ig_web_button_share_sheet" class="button" target="_blank"><img src="https://img.icons8.com/color/48/000000/instagram-new.png"/> Instagram</a>
 </section>
 
 <section id="servidores">
-  <h2>🌍 Servidores</h2>
-  <div class="card">
-    <h3>🎮 Counter Strike (MIX)</h3>
-    <p>IP: <b>45.235.98.42:27023</b></p>
-    <p>Participa en torneos y partidas rápidas con toda la comunidad.</p>
-  </div>
-  <div class="card">
-    <h3>🟩 Minecraft Server</h3>
-    <p>IP: <b>lospibesdelmix.mcserver.io</b></p>
-    <p>Explora, construye y participa en eventos únicos.</p>
-  </div>
-  <div class="card">
-    <h3>🧟 Left 4 Dead 2</h3>
-    <p>Servidor exclusivo de la comunidad</p>
-    <p>Supervivencia extrema y torneos semanales con amigos.</p>
-  </div>
+<h2>🌍 Servidores</h2>
+<div class="card"><h3>🎮 Counter Strike (MIX)</h3><p>IP: <b>45.235.98.42:27023</b></p><p>Participa en torneos y partidas rápidas con toda la comunidad.</p></div>
+<div class="card"><h3>🟩 Minecraft Server</h3><p>IP: <b>lospibesdelmix.mcserver.io</b></p><p>Explora, construye y participa en eventos únicos.</p></div>
+<div class="card"><h3>🧟 Left 4 Dead 2</h3><p>Servidor exclusivo de la comunidad</p><p>Supervivencia extrema y torneos semanales con amigos.</p></div>
 </section>
 
 <section id="anuncios">
-  <h2>📢 Anuncios</h2>
-  <div class="card">
-    <h3>¡Bienvenidos!</h3>
-    <p>Los servidores ya están activos y listos para jugar.</p>
-  </div>
-  <div class="card">
-    <h3>Eventos próximos</h3>
-    <p>Torneos de Counter Strike y minijuegos de Minecraft.</p>
-  </div>
-  <div class="card">
-    <h3>Nuevas funciones</h3>
-    <p>Roles personalizados, rankings y recompensas para los jugadores activos.</p>
-  </div>
+<h2>📢 Anuncios</h2>
+<div class="card"><h3>¡Bienvenidos!</h3><p>Los servidores ya están activos y listos para jugar.</p></div>
+<div class="card"><h3>Eventos próximos</h3><p>Torneos de Counter Strike y minijuegos de Minecraft.</p></div>
+<div class="card"><h3>Nuevas funciones</h3><p>Roles personalizados, rankings y recompensas para los jugadores activos.</p></div>
 </section>
 
 <section id="reglas">
-  <h2>📜 Reglas</h2>
-  <div class="card">
-    <h3>1️⃣ Nada de quilombos</h3>
-    <p>Venimos a divertirnos, no a generar drama. Quien no cumpla, fuera.</p>
+<h2>📜 Reglas</h2>
+<div class="card">
+<h3>1️⃣ Nada de quilombos</h3><p>Venimos a divertirnos, no a generar drama. Quien no cumpla, fuera.</p>
+<h3>2️⃣ Bardo con límites ✅</h3><p>Chistes y cargadas permitidos con respeto y comunicación.</p>
+<h3>3️⃣ Respeto ante todo</h3><p>Respeta a los admins y al dueño. Problemas: hablalo con ellos cordialmente.</p>
+<h3>4️⃣ Spam solo en su lugar</h3><p>Compartí tus redes y servidores en el canal correcto sin abusar.</p>
+</div>
+</section>
 
-    <h3>2️⃣ Bardo con límites ✅</h3>
-    <p>Chistes y cargadas permitidos con respeto y comunicación.</p>
+<section id="noticias">
+<h2>📰 Noticias</h2>
+<div class="card"><h3>Torneo Semanal</h3><p>Participa en el torneo de Counter Strike este fin de semana.</p></div>
+<div class="card"><h3>Evento de Construcción</h3><p>Un concurso de construcción en Minecraft con premios para los ganadores.</p></div>
+</section>
 
-    <h3>3️⃣ Respeto ante todo</h3>
-    <p>Respeta a los admins y al dueño. Problemas: hablalo con ellos cordialmente.</p>
-
-    <h3>4️⃣ Spam solo en su lugar</h3>
-    <p>Compartí tus redes y servidores en el canal correcto sin abusar.</p>
-  </div>
+<section id="galeria">
+<h2>📷 Galería</h2>
+<div class="card"><p>Próximamente fotos y capturas de partidas.</p></div>
 </section>
 
 <footer>
@@ -223,10 +159,14 @@ body.light-mode footer { background: #e5e7eb; color: #444; }
 </footer>
 
 <script>
-// Modo oscuro/claro
+// Dark/Light Mode con animación
 function toggleMode(){
-  document.body.classList.toggle('light-mode');
-  localStorage.setItem('theme', document.body.classList.contains('light-mode')?'light':'dark');
+  const body = document.body;
+  body.classList.toggle('light-mode');
+  const btn = document.getElementById('toggleModeBtn');
+  btn.classList.add('changed');
+  setTimeout(()=>btn.classList.remove('changed'), 800);
+  localStorage.setItem('theme', body.classList.contains('light-mode')?'light':'dark');
 }
 if(localStorage.getItem('theme')==='light'){document.body.classList.add('light-mode');}
 
