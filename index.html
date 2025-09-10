@@ -132,7 +132,7 @@
     .card:hover{transform:scale(1.02); box-shadow:0 6px 25px rgba(0,229,255,0.5);}
     .card h3{font-family:'Press Start 2P', cursive; color:var(--primary-dark); margin-bottom:0.5rem; transition: all 0.4s ease;}
     body.light-mode .card h3{color:var(--primary-light);}
-    .card p{font-size:0.85rem; color:#e0e0e0; line-height:1.3;}
+    .card p{font-size:1.1rem; color:#e0e0e0; line-height:1.6;}
     body.light-mode .card p{color:#212121;}
     .button-group{
         display: flex;
@@ -198,8 +198,15 @@
         }
         .button{width: 80%; max-width: 250px;}
     }
-    .typing{font-family:'Press Start 2P', cursive; border-right:.1em solid; display:inline-block; white-space:nowrap; overflow:hidden; animation:typing 3s steps(40,end) infinite;}
-    @keyframes typing{0%,50%,100%{width:0}25%,75%{width:100%}}
+    .typing{font-family:'Press Start 2P', cursive; overflow:hidden; white-space:nowrap; animation:typing 2s steps(40) infinite alternate, blink-caret 0.75s step-end infinite;}
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 100%; }
+    }
+    @keyframes blink-caret {
+        from, to { border-color: transparent; }
+        50% { border-color: var(--primary-dark); }
+    }
     .copy-btn{
         background:none;
         border:2px solid var(--primary-dark);
@@ -328,23 +335,6 @@ function toggleMode(){
     switchSound.volume=0.1; switchSound.play();
 }
 if(localStorage.getItem('theme')==='light'){document.body.classList.add('light-mode');}
-
-// Scrollspy y animaciones secciones/cards
-const sections=document.querySelectorAll('section');
-const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-        if(entry.isIntersecting){
-            entry.target.classList.add('visible');
-            const link=document.querySelector(`#sidebar a[href="#${entry.target.id}"]`);
-            document.querySelectorAll('#sidebar a').forEach(a=>a.classList.remove('active'));
-            if(link) link.classList.add('active');
-            switchSound.volume=0.1; switchSound.play();
-            const cards=entry.target.querySelectorAll('.card');
-            cards.forEach((card,i)=>setTimeout(()=>card.classList.add('visible'),i*150));
-        }
-    });
-},{threshold:0.3});
-sections.forEach(s=>observer.observe(s));
 
 // Copiar IP al portapapeles
 function copyToClipboard(elementId, button) {
