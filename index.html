@@ -75,10 +75,50 @@ main { margin-left:200px; padding:2rem; transition: all 0.5s ease; }
 section { min-height:100vh; padding:4rem 2rem; opacity:0; transform: translateY(20px) scale(0.97); transition: all 0.7s ease; scroll-margin-top:60px; }
 section.visible { opacity:1; transform: translateY(0) scale(1); }
 
+/* Bienvenida */
+.welcome-card {
+    text-align: center;
+    background: var(--sec-dark);
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,200,255,0.3);
+    max-width: 700px;
+    margin: auto;
+    transition: all 0.5s ease;
+}
+body.light-mode .welcome-card { background: var(--sec-light); box-shadow:0 8px 24px rgba(0,0,0,0.1); }
+.welcome-card h2 {
+    font-size: 2.5rem;
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+}
+body.light-mode .welcome-card h2 { color: var(--primary-light); }
+.welcome-card p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+.social-links a {
+    display: inline-block;
+    padding: 0.8rem 1.6rem;
+    border-radius: 12px;
+    background: var(--primary-dark);
+    color: #111;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.social-links a:hover { transform: scale(1.05); opacity: 0.9; }
+body.light-mode .social-links a { background: var(--primary-light); color:#fff; }
+
 /* Cards */
 .card {
     background: var(--sec-dark); color: var(--text-dark); border-radius: 12px;
-    padding:1.5rem; margin:1rem auto; max-width:600px; box-shadow:0 4px 12px rgba(0,200,255,0.3);
+    padding:1.5rem; margin:1rem auto; max-width:520px; box-shadow:0 4px 12px rgba(0,200,255,0.3);
     transition: all 0.5s ease; position: relative;
 }
 body.light-mode .card { background: var(--sec-light); color: var(--text-light); box-shadow:0 4px 12px rgba(0,0,0,0.1); }
@@ -102,29 +142,12 @@ body.light-mode .copy-btn { background: var(--primary-light); color:#fff; }
 body.light-mode .copy-message { background: var(--accent-light); }
 .copy-message.show { opacity: 1; }
 
-/* Welcome section */
-#welcome {
-    text-align:center;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--primary-dark);
-}
-body.light-mode #welcome { color: var(--primary-light); }
-
 /* Reglas */
 .rules h3 {
-    margin-top: 1rem;
-    font-size: 1.2rem;
+    margin: 1rem 0 0.5rem;
     color: var(--primary-dark);
 }
 body.light-mode .rules h3 { color: var(--primary-light); }
-
-.rules p {
-    margin: 0.3rem 0 1rem 0;
-    font-size: 0.95rem;
-    line-height: 1.4rem;
-}
 
 /* Footer */
 footer { background: var(--sec-dark); padding:1rem; text-align:center; font-size:0.65rem; color:#b0bec5; margin-top:2rem; }
@@ -153,12 +176,13 @@ body.light-mode footer { background: var(--sec-light); color:#444; }
 
 <main>
 <section id="inicio">
-    <h2 id="welcome">🎉 Bienvenidos 🎉</h2>
-    <p style="text-align:center; font-size:1.2rem;">Únete a nuestra comunidad gamer y vive momentos divertidos.</p>
-    <p style="text-align:center;">(Estaremos Actualizando todo de a poco)</p>
-    <div class="button-group" style="justify-content:center;">
-        <a href="https://dsc.gg/lospibesdelmix" class="button" target="_blank">Discord</a>
-        <a href="https://www.instagram.com/lospibesdelmixcs/" class="button" target="_blank">Instagram</a>
+    <div class="welcome-card">
+        <h2>Bienvenidos</h2>
+        <p>Únete a nuestra comunidad gamer y vive momentos divertidos.<br>(Estaremos actualizando todo de a poco)</p>
+        <div class="social-links">
+            <a href="https://dsc.gg/lospibesdelmix" target="_blank">💬 Discord</a>
+            <a href="https://www.instagram.com/lospibesdelmixcs/" target="_blank">📸 Instagram</a>
+        </div>
     </div>
 </section>
 
@@ -167,13 +191,13 @@ body.light-mode footer { background: var(--sec-light); color:#444; }
     <div class="card">
         <h3>Counter Strike</h3>
         <p>IP: <b id="cs-ip">45.235.98.42:27023</b></p>
-        <button class="copy-btn" onclick="copyToClipboard('cs-ip', this)">📋 Copiar IP</button>
+        <button class="copy-btn" onclick="copyToClipboard('cs-ip', this)">Copiar IP</button>
         <span class="copy-message">¡Copiado!</span>
     </div>
     <div class="card">
         <h3>Minecraft</h3>
         <p>IP: <b id="mc-ip">lospibesdelmix.mcserver.io</b></p>
-        <button class="copy-btn" onclick="copyToClipboard('mc-ip', this)">📋 Copiar IP</button>
+        <button class="copy-btn" onclick="copyToClipboard('mc-ip', this)">Copiar IP</button>
         <span class="copy-message">¡Copiado!</span>
     </div>
 </section>
@@ -187,16 +211,13 @@ body.light-mode footer { background: var(--sec-light); color:#444; }
     <h2>Reglas</h2>
     <div class="card rules">
         <h3>1️⃣ Nada de problemas</h3>
-        <p>Venimos a relajarnos y divertirnos, no a generar drama. Si alguien insiste en armar lío, la decisión será simple: <b>afuera</b>.</p>
-
+        <p>Venimos a relajarnos y divertirnos, no a generar drama. Si alguien insiste en armar lío, la decisión será simple: afuera.</p>
         <h3>2️⃣ El bardo está permitido… con límites</h3>
-        <p>Se acepta el chiste, la cargada y el bardo sano, pero primero hay que conocerse un poco. La clave es la <b>comunicación</b> y el <b>respeto</b>.</p>
-
+        <p>Se acepta el chiste, la cargada y el bardo sano, pero primero hay que conocerse un poco. La clave es la comunicación y el respeto.</p>
         <h3>3️⃣ Respeto ante todo</h3>
-        <p>A los <b>admins</b> y al <b>dueño</b> se los respeta siempre. Si hay algún problema, hablalo con ellos de buena manera.</p>
-
+        <p>A los admins y al dueño se los respeta siempre. Si hay algún problema, hablalo con ellos de buena manera.</p>
         <h3>4️⃣ Spam solo en su lugar</h3>
-        <p>Podés compartir tus redes, servidores u otras cosas en el canal correspondiente. Pero ojo, <b>sin abusar ni spamear de manera excesiva</b>.</p>
+        <p>Podés compartir tus redes, servidores u otras cosas en el canal correspondiente. Pero ojo, sin abusar ni spamear de manera excesiva.</p>
     </div>
 </section>
 </main>
@@ -273,4 +294,3 @@ function copyToClipboard(id, btn){
 </script>
 </body>
 </html>
-
