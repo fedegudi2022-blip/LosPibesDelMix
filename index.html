@@ -1,170 +1,230 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Los Pibes del Mix</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Los Pibes del Mix</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-    body {
-      font-family: 'Press Start 2P', cursive;
-      margin: 0;
-      background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
-      background-size: 300% 300%;
-      animation: gradientBG 12s ease infinite;
-      color: #f1f5f9;
-      text-align: center;
-    }
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+body {
+  font-family: 'Press Start 2P', cursive;
+  margin: 0;
+  background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
+  background-size: 300% 300%;
+  animation: gradientBG 15s ease infinite;
+  color: #f1f5f9;
+  text-align: center;
+}
 
-    header {
-      padding: 2.5rem 1rem;
-      background: #1e293b;
-      box-shadow: 0 0 15px rgba(0, 247, 255, 0.3);
-    }
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
 
-    h1 {
-      font-size: 2rem;
-      margin: 0;
-      color: #38bdf8;
-      text-shadow: 0 0 6px #38bdf8;
-    }
+header {
+  padding: 2rem 1rem 1rem 1rem;
+  background: #1e293b;
+  box-shadow: 0 0 15px rgba(0, 247, 255, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-    p {
-      margin: 1rem 0 2rem;
-      font-size: 0.85rem;
-      color: #cbd5e1;
-    }
+h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: #38bdf8;
+  text-shadow: 0 0 6px #38bdf8;
+}
 
-    section {
-      padding: 2rem 1rem;
-    }
+nav {
+  margin-top: 1rem;
+}
 
-    h2 {
-      font-size: 1rem;
-      color: #f472b6;
-      text-shadow: 0 0 4px #f472b6;
-      margin-bottom: 1.2rem;
-    }
+nav a {
+  display: inline-block;
+  margin: 0.3rem 0.5rem;
+  padding: 0.5rem 1rem;
+  color: #38bdf8;
+  background: #111;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.7rem;
+  transition: 0.3s;
+  box-shadow: 0 0 5px #00f7ff;
+}
 
-    a.button {
-      display: inline-block;
-      margin: 0.8rem;
-      padding: 0.8rem 1.5rem;
-      background: #111;
-      border: 2px solid #38bdf8;
-      color: #38bdf8;
-      text-decoration: none;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 10px #00f7ff;
-    }
+nav a:hover {
+  background: #38bdf8;
+  color: #111;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #00f7ff;
+}
 
-    a.button:hover {
-      background: #38bdf8;
-      color: #111;
-      box-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff;
-      transform: scale(1.05);
-    }
+section {
+  padding: 2rem 1rem;
+}
 
-    .server-box, .rules-box {
-      background: #1e293b;
-      border-radius: 12px;
-      padding: 1rem;
-      margin: 1rem auto;
-      max-width: 500px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      text-align: left;
-    }
+section h2 {
+  font-size: 1rem;
+  color: #f472b6;
+  text-shadow: 0 0 4px #f472b6;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
 
-    .server-box h3, .rules-box h3 {
-      margin: 0 0 0.5rem;
-      color: #38bdf8;
-      font-size: 0.9rem;
-    }
+section h2::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 2px;
+  background: #38bdf8;
+  margin: 6px auto 0 auto;
+  border-radius: 2px;
+}
 
-    .server-box p, .rules-box p {
-      margin: 0.3rem 0;
-      font-size: 0.8rem;
-      color: #e2e8f0;
-    }
+a.button {
+  display: inline-block;
+  margin: 0.8rem;
+  padding: 0.8rem 1.5rem;
+  background: #111;
+  border: 2px solid #38bdf8;
+  color: #38bdf8;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #00f7ff;
+}
 
-    footer {
-      background: #1e293b;
-      padding: 1rem;
-      margin-top: 2rem;
-      font-size: 0.65rem;
-      color: #94a3b8;
-    }
-  </style>
+a.button:hover {
+  background: #38bdf8;
+  color: #111;
+  box-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff;
+  transform: scale(1.05);
+}
+
+.card {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 500px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  text-align: left;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card h3 {
+  margin: 0 0 0.5rem;
+  color: #38bdf8;
+  font-size: 0.9rem;
+}
+
+.card p {
+  margin: 0.3rem 0;
+  font-size: 0.8rem;
+  color: #e2e8f0;
+}
+
+footer {
+  background: #1e293b;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-size: 0.65rem;
+  color: #94a3b8;
+  text-align: center;
+}
+
+/* Smooth scroll anchor offset */
+:target::before {
+  content: "";
+  display: block;
+  height: 90px;
+  margin-top: -90px;
+  visibility: hidden;
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>🌐 Los Pibes del Mix 🌐</h1>
-    <p>La comunidad gamer más piola en Discord, Instagram y más</p>
-  </header>
 
-  <section>
-    <h2>Conéctate con nosotros</h2>
-    <a href="https://dsc.gg/lospibesdelmix" class="button" target="_blank">🎮 Discord</a>
-    <a href="https://www.instagram.com/lospibesdelmixcs/?utm_source=ig_web_button_share_sheet" class="button" target="_blank">📷 Instagram</a>
-  </section>
+<header>
+  <h1>🌐 Los Pibes del Mix 🌐</h1>
+  <p>La comunidad gamer más piola en Discord, Instagram y más</p>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#servidores">Servidores</a>
+    <a href="#anuncios">Anuncios</a>
+    <a href="#reglas">Reglas</a>
+  </nav>
+</header>
 
-  <section>
-    <h2>¿Qué es Los Pibes del Mix?</h2>
-    <p>
-      Somos una comunidad de amigos y jugadores que compartimos<br>
-      buenos momentos en juegos como Counter Strike, Minecraft, Left 4 Dead 2 y mucho más.  
-      Unite y sé parte de la banda. 🚀
-    </p>
-  </section>
+<section id="inicio">
+  <h2>Conéctate con nosotros</h2>
+  <a href="https://dsc.gg/lospibesdelmix" class="button" target="_blank">🎮 Discord</a>
+  <a href="https://www.instagram.com/lospibesdelmixcs/?utm_source=ig_web_button_share_sheet" class="button" target="_blank">📷 Instagram</a>
+</section>
 
-  <section>
-    <h2>🌍 Servidores de Juegos</h2>
+<section id="servidores">
+  <h2>🌍 Servidores de Juegos</h2>
 
-    <div class="server-box">
-      <h3>🎮 Counter Strike (MIX)</h3>
-      <p>IP: <b>45.235.98.42:27023</b></p>
-    </div>
+  <div class="card">
+    <h3>🎮 Counter Strike (MIX)</h3>
+    <p>IP: <b>45.235.98.42:27023</b></p>
+  </div>
 
-    <div class="server-box">
-      <h3>🟩 Minecraft Server</h3>
-      <p>IP: <b>lospibesdelmix.mcserver.io</b></p>
-    </div>
+  <div class="card">
+    <h3>🟩 Minecraft Server</h3>
+    <p>IP: <b>lospibesdelmix.mcserver.io</b></p>
+  </div>
 
-    <div class="server-box">
-      <h3>🧟 Left 4 Dead 2</h3>
-      <p>Servidor exclusivo de la comunidad</p>
-    </div>
-  </section>
+  <div class="card">
+    <h3>🧟 Left 4 Dead 2</h3>
+    <p>Servidor exclusivo de la comunidad</p>
+  </div>
+</section>
 
-  <section>
-    <h2>📜 Reglas y Anuncios</h2>
+<section id="anuncios">
+  <h2>📢 Anuncios</h2>
+  <div class="card">
+    <h3>¡Bienvenidos!</h3>
+    <p>Se ha abierto la comunidad y los servidores están listos para jugar.</p>
+    <p>Próximamente más eventos y torneos para la banda.</p>
+  </div>
+</section>
 
-    <div class="rules-box">
-      <h3>1️⃣ Nada de quilombos ni puteríos</h3>
-      <p>Venimos a relajarnos y divertirnos, no a generar drama. Si alguien insiste en armar lío, la decisión será simple: afuera.</p>
+<section id="reglas">
+  <h2>📜 Reglas</h2>
+  <div class="card">
+    <h3>1️⃣ Nada de quilombos ni puteríos</h3>
+    <p>Venimos a relajarnos y divertirnos, no a generar drama. Si alguien insiste en armar lío, afuera.</p>
 
-      <h3>2️⃣ El bardo está permitido… con límites ✅</h3>
-      <p>Se acepta el chiste, la cargada y el bardo sano, pero primero hay que conocerse un poco. La clave es la comunicación y el respeto.</p>
+    <h3>2️⃣ El bardo está permitido… con límites ✅</h3>
+    <p>Se acepta el chiste, la cargada y el bardo sano, pero primero hay que conocerse un poco. La clave es la comunicación y el respeto.</p>
 
-      <h3>3️⃣ Respeto ante todo</h3>
-      <p>A los admins y al dueño se los respeta siempre. Si hay algún problema, hablalo con ellos de buena manera.</p>
+    <h3>3️⃣ Respeto ante todo</h3>
+    <p>A los admins y al dueño se los respeta siempre. Si hay algún problema, hablalo con ellos de buena manera.</p>
 
-      <h3>4️⃣ Spam solo en su lugar</h3>
-      <p>Podés compartir tus redes, servidores u otras cosas en el canal correspondiente. Pero ojo, sin abusar ni spamear de manera excesiva.</p>
-    </div>
-  </section>
+    <h3>4️⃣ Spam solo en su lugar</h3>
+    <p>Podés compartir tus redes, servidores u otras cosas en el canal correspondiente. Pero ojo, sin abusar ni spamear de manera excesiva.</p>
+  </div>
+</section>
 
-  <footer>
-    <p>© 2025 Los Pibes del Mix | Comunidad Gamer</p>
-  </footer>
+<footer>
+  <p>© 2025 Los Pibes del Mix | Comunidad Gamer</p>
+</footer>
+
 </body>
 </html>
+
