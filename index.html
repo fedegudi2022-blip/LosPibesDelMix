@@ -7,47 +7,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg-dark:#0b0c1a;
-  --sec-dark:#1c1f3a;
-  --primary-dark:#00f0ff;
+  --bg-dark:#0a0a0a;
+  --sec-dark:#111111;
+  --primary-dark:#00ffff;
   --accent-dark:#ff00ff;
   --text-dark:#e0e7ff;
-  --bg-light:#f0f4f8;
-  --sec-light:#e5e7eb;
+  --bg-light:#ffffff;
+  --sec-light:#f0f0f0;
   --primary-light:#2563eb;
   --accent-light:#f472b6;
-  --text-light:#111;
+  --text-light:#111111;
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Press Start 2P',cursive;scroll-behavior:smooth;}
-a{text-decoration:none;color:inherit;}
-img{max-width:100%;}
-body{background:var(--bg-dark);color:var(--text-dark);overflow-x:hidden;position:relative;transition:all 0.8s ease;}
+body{background:var(--bg-dark);color:var(--text-dark);overflow-x:hidden;transition:all 0.8s ease;}
 body.light-mode{background:var(--bg-light);color:var(--text-light);}
 #particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
 nav#sidebar{position:fixed;top:0;left:0;width:220px;height:100%;background:var(--sec-dark);display:flex;flex-direction:column;align-items:center;padding:2rem 1rem;z-index:1000;box-shadow:2px 0 15px rgba(0,255,255,0.2);}
-body.light-mode nav#sidebar{background:var(--sec-light); box-shadow:2px 0 12px rgba(0,0,0,0.15);}
+body.light-mode nav#sidebar{background:var(--sec-light);box-shadow:2px 0 12px rgba(0,0,0,0.15);}
 nav#sidebar h1{color:var(--primary-dark); margin-bottom:2rem; font-size:1.5rem; text-align:center; text-shadow:0 0 10px var(--primary-dark);}
 body.light-mode nav#sidebar h1{color:var(--primary-light); text-shadow:none;}
 nav#sidebar a{color:var(--primary-dark); padding:0.8rem 1rem; margin:0.5rem 0; border-radius:8px; width:100%; text-align:center; transition:all 0.3s; box-shadow:0 0 8px var(--primary-dark);}
 body.light-mode nav#sidebar a{color:var(--primary-light); background:#e5e7eb; box-shadow:none;}
 nav#sidebar a.active, nav#sidebar a:hover{background:var(--primary-dark); color:#111; transform:scale(1.05); box-shadow:0 0 15px var(--primary-dark),0 0 30px var(--primary-dark);}
 body.light-mode nav#sidebar a.active, body.light-mode nav#sidebar a:hover{background:var(--primary-light); color:#fff;}
-.toggle-btn{margin-top:2rem;padding:0.5rem 1rem;background:var(--primary-dark);color:#111;border-radius:8px;cursor:pointer;font-size:0.7rem;overflow:hidden;position:relative;transition: all 0.5s ease;}
+.toggle-btn{margin-top:2rem;padding:0.5rem 1rem;background:var(--primary-dark);color:#111;border-radius:8px;cursor:pointer;font-size:0.7rem;overflow:hidden;transition: all 0.5s ease;}
 .toggle-btn.changed::after{opacity:1;}
 main{margin-left:220px;padding:2rem;transition:all 0.6s ease;position:relative;z-index:1;}
 section{min-height:100vh;padding:4rem 2rem;scroll-margin-top:60px;opacity:0;transform:translateY(50px) scale(0.95);transition: all 0.6s ease-out;}
 section.visible{opacity:1; transform:translateY(0) scale(1);}
 h2{font-size:2rem; color:var(--accent-dark); margin-bottom:1rem; text-shadow:0 0 12px var(--accent-dark); transition: all 0.6s ease;}
 body.light-mode h2{color:var(--accent-light); text-shadow:none;}
-h2:hover{text-shadow:0 0 25px var(--accent-dark),0 0 50px var(--accent-dark);}
-body.light-mode h2:hover{text-shadow:0 0 20px var(--accent-light),0 0 40px var(--accent-light);}
 h2::after{content:'';display:block;width:70px;height:3px;background:var(--primary-dark);margin:8px auto 0 auto;border-radius:3px;}
 body.light-mode h2::after{background:var(--primary-light);}
 .card{background:var(--sec-dark); border-radius:12px; padding:1.5rem; margin:1rem auto; max-width:520px; text-align:left; box-shadow:0 4px 20px rgba(0,255,255,0.3); transition: transform 0.5s, box-shadow 0.5s, background 0.5s, opacity 0.5s; opacity:0; transform:translateY(60px) scale(0.9);}
 body.light-mode .card{background:var(--sec-light); color:var(--text-light); box-shadow:0 4px 12px rgba(0,0,0,0.1);}
 .card.visible{opacity:1; transform:translateY(0) scale(1);}
 .card:hover{transform:scale(1.05); box-shadow:0 6px 25px rgba(0,255,255,0.5);}
-.card h3{color:var(--primary-dark); margin-bottom:0.5rem;}
+.card h3{color:var(--primary-dark); margin-bottom:0.5rem; transition: all 0.4s ease;}
 body.light-mode .card h3{color:var(--primary-light);}
 .card p{font-size:0.85rem; color:#c9d1d9; line-height:1.3;}
 body.light-mode .card p{color:#111;}
@@ -60,15 +56,18 @@ body.light-mode .button:hover{animation:glowPulseLight 1s infinite alternate;}
 footer{background:var(--sec-dark); padding:1rem; font-size:0.65rem; color:#94a3b8; text-align:center; margin-top:2rem;}
 body.light-mode footer{background:var(--sec-light); color:#444;}
 @media(max-width:768px){nav#sidebar{width:100%;height:auto;position:relative;flex-direction:row;justify-content:space-around;padding:1rem;}main{margin-left:0;}}
-
+.typing{border-right:.1em solid; display:inline-block; white-space:nowrap; overflow:hidden; animation:typing 3s steps(40,end) infinite;}
+@keyframes typing{0%,50%,100%{width:0}25%,75%{width:100%}}
 </style>
 </head>
 <body>
 
+<audio id="switchSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3" preload="auto" volume="0.1"></audio>
+
 <canvas id="particles"></canvas>
 
 <nav id="sidebar">
-<h1>🌐 Los Pibes del Mix</h1>
+<h1 class="typing">🌐 Los Pibes del Mix</h1>
 <a href="#inicio">Inicio</a>
 <a href="#servidores">Servidores</a>
 <a href="#anuncios">Anuncios</a>
@@ -113,51 +112,26 @@ body.light-mode footer{background:var(--sec-light); color:#444;}
 </footer>
 
 <script>
-// PARTICULAS CON LINEAS
-const canvas=document.getElementById('particles');
-const ctx=canvas.getContext('2d');
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+const switchSound=document.getElementById('switchSound');
 
-let particles=[];
-for(let i=0;i<120;i++){
-  particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*3+1,dx:(Math.random()-0.5)*1.2,dy:(Math.random()-0.5)*1.2});
-}
+window.onload = () => {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  function resizeCanvas() {canvas.width=window.innerWidth; canvas.height=window.innerHeight;}
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
 
-function connectParticles(){
-  for(let a=0;a<particles.length;a++){
-    for(let b=a+1;b<particles.length;b++){
-      let dx=particles[a].x-particles[b].x;
-      let dy=particles[a].y-particles[b].y;
-      let dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<120){
-        ctx.beginPath();
-        ctx.strokeStyle=body.classList.contains('light-mode')?'rgba(0,0,0,0.1)':'rgba(0,255,255,0.2)';
-        ctx.lineWidth=1;
-        ctx.moveTo(particles[a].x,particles[a].y);
-        ctx.lineTo(particles[b].x,particles[b].y);
-        ctx.stroke();
-      }
-    }
-  }
-}
+  let particles = [];
+  for(let i=0;i<120;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*3+1,dx:(Math.random()-0.5)*1.2,dy:(Math.random()-0.5)*1.2});}
 
-function animateParticles(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=body.classList.contains('light-mode')?'rgba(0,0,0,0.1)':'rgba(0,255,255,0.7)';
-    ctx.fill();
-    p.x+=p.dx;p.y+=p.dy;
-    if(p.x<0||p.x>canvas.width)p.dx*=-1;
-    if(p.y<0||p.y>canvas.height)p.dy*=-1;
-  });
-  connectParticles();
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
-window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+  function connectParticles(){
+    for(let a=0;a<particles.length;a++){for(let b=a+1;b<particles.length;b++){
+      let dx=particles[a].x-particles[b].x; let dy=particles[a].y-particles[b].y; let dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){ctx.beginPath(); ctx.strokeStyle=document.body.classList.contains('light-mode')?'rgba(0,0,0,0.1)':'rgba(0,255,255,0.2)'; ctx.lineWidth=1;
+      ctx.moveTo(particles[a].x,particles[a].y); ctx.lineTo(particles[b].x,particles[b].y); ctx.stroke();}}}}
+  function animateParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=document.body.classList.contains('light-mode')?'rgba(0,0,0,0.1)':'rgba(0,255,255,0.7)';ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>canvas.width)p.dx*=-1;if(p.y<0||p.y>canvas.height)p.dy*=-1;});connectParticles();requestAnimationFrame(animateParticles);}
+  animateParticles();
+};
 
 // Dark/Light Mode
 function toggleMode(){
@@ -166,6 +140,7 @@ function toggleMode(){
   btn.classList.add('changed');
   setTimeout(()=>btn.classList.remove('changed'),800);
   localStorage.setItem('theme',document.body.classList.contains('light-mode')?'light':'dark');
+  switchSound.volume=0.1; switchSound.play();
 }
 if(localStorage.getItem('theme')==='light'){document.body.classList.add('light-mode');}
 
@@ -178,6 +153,7 @@ const observer=new IntersectionObserver(entries=>{
       const link=document.querySelector(`#sidebar a[href="#${entry.target.id}"]`);
       document.querySelectorAll('#sidebar a').forEach(a=>a.classList.remove('active'));
       if(link) link.classList.add('active');
+      switchSound.volume=0.1; switchSound.play();
       const cards=entry.target.querySelectorAll('.card');
       cards.forEach((card,i)=>setTimeout(()=>card.classList.add('visible'),i*150));
     }
@@ -188,3 +164,4 @@ sections.forEach(s=>observer.observe(s));
 
 </body>
 </html>
+
