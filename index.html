@@ -4,296 +4,168 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Los Pibes del Mix</title>
-<meta name="description" content="Comunidad gamer de Counter Strike, Minecraft, Left 4 Dead 2 y más. Únete a nuestros servidores y torneos.">
-<link rel="icon" href="https://ejemplo.com/favicon.ico" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{
-    /* Modo Oscuro */
-    --bg-dark:#0b0b0b;
-    --sec-dark:#1a1a1a;
-    --primary-dark:#00e5ff;
-    --accent-dark:#ff4081;
-    --text-dark:#e0e0e0;
-    /* Modo Claro */
-    --bg-light:#ffffff;
-    --sec-light:#f0f0f0;
-    --primary-light:#1976d2;
-    --accent-light:#d81b60;
-    --text-light:#111111;
-}
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Montserrat', sans-serif;scroll-behavior:smooth;}
-body{
-    background: var(--bg-dark);
-    color: var(--text-dark);
-    overflow-x:hidden;
-    transition: all 0.8s ease;
-    position: relative;
-}
-body.light-mode{
-    background: var(--bg-light);
-    color: var(--text-light);
-}
-body::before{
-    content:'';
-    position:fixed;
-    top:0; left:0; right:0; bottom:0;
-    background: rgba(0,0,0,0.7);
-    z-index:-1;
-    transition: background 0.8s ease;
-}
-body.light-mode::before{
-    background: rgba(255,255,255,0.9);
+:root {
+  --bg-dark: #121212;
+  --sec-dark: #1e1e1e;
+  --primary-dark: #00bcd4;
+  --accent-dark: #ff4081;
+  --text-dark: #e0e0e0;
+
+  --bg-light: #f5f5f5;
+  --sec-light: #ffffff;
+  --primary-light: #1976d2;
+  --accent-light: #d81b60;
+  --text-light: #222222;
 }
 
-/* Partículas */
-#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+/* General */
+* { box-sizing: border-box; margin:0; padding:0; font-family:'Montserrat', sans-serif; scroll-behavior:smooth; }
+body { background: var(--bg-dark); color: var(--text-dark); transition: all 0.6s ease; overflow-x:hidden; }
+body.light-mode { background: var(--bg-light); color: var(--text-light); }
 
-/* Sidebar */
-nav#sidebar{
-    position: fixed;
-    top:0; left:0; width:180px; height:100%;
-    background: rgba(26,26,26,0.8); backdrop-filter: blur(10px);
-    display:flex; flex-direction:column; align-items:center;
-    padding:2rem 1rem; z-index:1000;
-    box-shadow: 2px 0 15px rgba(0,229,255,0.2);
-    transition: transform 0.3s ease, background 0.3s ease;
+/* Barra lateral */
+nav#sidebar {
+  position: fixed; top:0; left:0; width:200px; height:100%; background: var(--sec-dark);
+  display:flex; flex-direction:column; align-items:center; padding:2rem 1rem; transition: all 0.4s ease;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.3); z-index:1000;
 }
-body.light-mode nav#sidebar{
-    background: rgba(255,255,255,0.9);
-    box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+body.light-mode nav#sidebar { background: var(--sec-light); box-shadow:2px 0 12px rgba(0,0,0,0.15); }
+
+nav#sidebar h1 {
+  font-family:'Press Start 2P', cursive; font-size:1.2rem; text-align:center; margin-bottom:2rem;
+  color: var(--primary-dark); transition: color 0.4s;
 }
-nav#sidebar h1{
-    color: var(--primary-dark);
-    font-size:1.3rem;
-    margin-bottom:2rem;
-    text-align:center;
-    text-shadow: 0 0 15px var(--primary-dark);
-    overflow:hidden; white-space:nowrap; animation: typing 2s steps(30) 1 forwards, blink-caret 0.75s step-end infinite;
+body.light-mode nav#sidebar h1 { color: var(--primary-light); }
+
+nav#sidebar a {
+  text-decoration:none; color: var(--text-dark); width:100%; text-align:center;
+  padding:0.8rem 0; margin:0.5rem 0; border-radius:6px; position:relative;
+  transition: all 0.3s ease;
 }
-body.light-mode nav#sidebar h1{
-    color: var(--primary-light);
-    text-shadow: 0 0 10px var(--primary-light);
+body.light-mode nav#sidebar a { color: var(--text-light); }
+
+nav#sidebar a::after {
+  content:''; position:absolute; left:0; bottom:0; width:0; height:2px;
+  background: var(--primary-dark); transition: width 0.3s;
+}
+body.light-mode nav#sidebar a::after { background: var(--primary-light); }
+
+nav#sidebar a:hover::after { width:100%; }
+
+nav#sidebar a.active { font-weight:700; color: var(--primary-dark); }
+body.light-mode nav#sidebar a.active { color: var(--primary-light); }
+
+/* Botón modo oscuro/claro */
+.toggle-btn {
+  margin-top:auto; padding:0.5rem 1rem; background: var(--primary-dark); color:#fff;
+  border:none; border-radius:6px; cursor:pointer; transition: all 0.5s ease; display:flex; align-items:center; justify-content:center;
+}
+body.light-mode .toggle-btn { background: var(--primary-light); color:#fff; }
+
+#modeIndicator {
+  margin-left:8px; width:12px; height:12px; border-radius:50%; background:#fff;
+  transition: all 0.4s ease;
 }
 
-/* Links */
-nav#sidebar a{
-    color: var(--text-dark); padding:0.8rem 1rem; margin:0.5rem 0;
-    width:100%; text-align:center; border-radius:8px; text-decoration:none;
-    position:relative; font-weight:700; overflow:hidden;
-}
-body.light-mode nav#sidebar a{color: var(--text-light);}
-nav#sidebar a::before{
-    content:''; position:absolute; top:0; left:0; width:100%; height:100%;
-    background: var(--primary-dark); transform: scaleX(0); transform-origin:left;
-    transition: transform 0.3s ease; z-index:-1;
-}
-body.light-mode nav#sidebar a::before{background: var(--primary-light);}
-nav#sidebar a.active, nav#sidebar a:hover{color: var(--bg-dark); transform: scale(1.03);}
-body.light-mode nav#sidebar a.active, body.light-mode nav#sidebar a:hover{color: var(--sec-light);}
-nav#sidebar a.active::before, nav#sidebar a:hover::before{transform: scaleX(1); opacity:1;}
-
-/* Toggle */
-.toggle-btn{
-    margin-top:2rem; padding:0.5rem 1rem; background:var(--primary-dark);
-    color:#111; border-radius:8px; cursor:pointer; font-size:0.7rem;
-}
-.toggle-btn.changed::after{opacity:1;}
-
-/* Main & Sections */
-main{margin-left:180px;padding:2rem;transition: all 0.6s ease; position:relative; z-index:1;}
-section{min-height:100vh; padding:4rem 2rem; scroll-margin-top:60px;
-    opacity:0; transform:translateY(20px) scale(0.95); transition: all 0.8s cubic-bezier(0.4,0,0.2,1);}
-section.visible{opacity:1; transform:translateY(0) scale(1);}
-h2{font-family:'Press Start 2P', cursive; font-size:2rem; color:var(--accent-dark); margin-bottom:1rem; text-shadow:0 0 12px var(--accent-dark);}
-body.light-mode h2{color:var(--accent-light); text-shadow:none;}
-h2::after{content:'';display:block;width:70px;height:3px;background:var(--primary-dark);margin:8px auto 0 auto;border-radius:3px;}
-body.light-mode h2::after{background: var(--primary-light);}
+/* Main y secciones */
+main { margin-left:200px; padding:2rem; transition: margin 0.5s; }
+section { min-height:100vh; padding:2rem 1rem; opacity:0; transform: translateY(20px); transition: all 0.8s ease; }
+section.visible { opacity:1; transform:translateY(0); }
 
 /* Cards */
-.card{
-    background: var(--sec-dark); border-radius:12px; padding:1.5rem;
-    margin:1rem auto; max-width:520px; text-align:left;
-    box-shadow:0 4px 20px rgba(0,229,255,0.3);
-    transition: all 0.5s ease; opacity:0; transform:translateY(30px) scale(0.95);
-}
-body.light-mode .card{background: var(--sec-light); color: var(--text-light); box-shadow:0 4px 12px rgba(0,0,0,0.1);}
-.card.visible{opacity:1; transform:translateY(0) scale(1);}
-.card:hover{transform:scale(1.03); box-shadow:0 6px 25px rgba(0,229,255,0.5);}
-.card h3{font-family:'Press Start 2P', cursive; color:var(--primary-dark); margin-bottom:0.5rem;}
-body.light-mode .card h3{color: var(--primary-light);}
-.card p{font-size:1rem; color:#e0e0e0; line-height:1.5;}
-body.light-mode .card p{color:#212121;}
-
-/* Buttons */
-.button-group{display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; margin-top:1.5rem;}
-.button{
-    display:inline-flex; align-items:center; justify-content:center;
-    padding:0.8rem 1.5rem; font-size:0.9rem; border-radius:12px; border:2px solid var(--primary-dark);
-    color: var(--primary-dark); background: transparent; text-decoration:none;
-    position:relative; overflow:hidden; transition:all 0.4s ease;
-}
-.button::before{
-    content:''; position:absolute; top:0; left:0; width:100%; height:100%; background: var(--primary-dark);
-    transform: scaleX(0); transform-origin:left; transition:transform 0.4s ease; z-index:-1;
-}
-body.light-mode .button::before{background: var(--primary-light);}
-.button:hover::before{transform:scaleX(1);}
-.button:hover{color: var(--bg-dark); border-color:transparent;}
-body.light-mode .button:hover{color: var(--sec-light);}
+.card { background: var(--sec-dark); border-radius:12px; padding:1.5rem; margin:1rem auto; max-width:500px; color:var(--text-dark);
+transition: all 0.5s ease; }
+body.light-mode .card { background: var(--sec-light); color:var(--text-light); }
+.card:hover { transform: scale(1.03); box-shadow:0 6px 20px rgba(0,0,0,0.2); }
 
 /* Footer */
-footer{background:var(--sec-dark); padding:1rem; font-size:0.65rem; color:#b0bec5; text-align:center; margin-top:2rem;}
-body.light-mode footer{background:var(--sec-light); color:#444;}
+footer { text-align:center; padding:1rem; background:var(--sec-dark); color:var(--text-dark); margin-top:2rem; }
+body.light-mode footer { background:var(--sec-light); color:var(--text-light); }
 
-/* Copy buttons */
-.copy-btn{
-    background:none; border:2px solid var(--primary-dark); color:var(--primary-dark);
-    cursor:pointer; padding:0.3rem 0.5rem; border-radius:6px; font-size:0.7rem; margin-left:10px; position:relative;
-    transition: all 0.3s ease;
-}
-.copy-btn:hover{background:var(--primary-dark); color:var(--bg-dark);}
-.copy-message{
-    position:absolute; top:-25px; left:50%; transform:translateX(-50%);
-    background: var(--sec-dark); color: var(--primary-dark); padding:5px 10px;
-    border-radius:5px; font-size:0.7rem; opacity:0; pointer-events:none; transition: opacity 0.3s ease;
-}
-.copy-btn.copied .copy-message{opacity:1;}
-
-/* Animación typing */
-@keyframes typing {from{width:0;}to{width:100%;}}
-@keyframes blink-caret{from,to{border-color:transparent;}50%{border-color:var(--primary-dark);}}
-
+/* Responsive */
 @media(max-width:768px){
-    nav#sidebar{transform:translateX(-100%); width:250px; padding-top:4rem;}
-    nav#sidebar.open{transform:translateX(0);}
-    main{margin-left:0; padding-top:5rem;}
-    .button-group{flex-direction:column;}
-    .button{width:80%; max-width:250px;}
+  nav#sidebar{width:0; padding-top:4rem; overflow:hidden;}
+  nav#sidebar.open{width:200px;}
+  main{margin-left:0; padding-top:5rem;}
 }
+
 </style>
 </head>
 <body>
 
-<audio id="switchSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3" preload="auto"></audio>
-<canvas id="particles"></canvas>
-
-<div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
 <nav id="sidebar">
-<h1>🌐 Los Pibes del Mix</h1>
-<a href="#inicio" onclick="closeMenu()">Inicio</a>
-<a href="#servidores" onclick="closeMenu()">Servidores</a>
-<a href="#anuncios" onclick="closeMenu()">Anuncios</a>
-<a href="#reglas" onclick="closeMenu()">Reglas</a>
-<button class="toggle-btn" id="toggleModeBtn" onclick="toggleMode()">🌙 / ☀️</button>
+  <h1>Los Pibes del Mix</h1>
+  <a href="#inicio" class="active">Inicio</a>
+  <a href="#servidores">Servidores</a>
+  <a href="#anuncios">Anuncios</a>
+  <a href="#reglas">Reglas</a>
+  <button class="toggle-btn" onclick="toggleMode()">Modo <span id="modeIndicator"></span></button>
 </nav>
 
 <main>
 <section id="inicio">
-<h2>🎮 Bienvenidos</h2>
-<p>Únete a nuestra comunidad gamer y vive experiencias épicas en Counter Strike, Minecraft, Left 4 Dead 2 y más.</p>
-<div class="button-group">
-<a href="https://dsc.gg/lospibesdelmix" class="button" target="_blank">Discord</a>
-<a href="https://www.instagram.com/lospibesdelmixcs/" class="button" target="_blank">Instagram</a>
-</div>
+  <h2>Bienvenidos</h2>
+  <p>Únete a nuestra comunidad gamer y disfruta de Counter Strike, Minecraft, L4D2 y más.</p>
 </section>
 
 <section id="servidores">
-<h2>🌍 Servidores</h2>
-<div class="card">
-<h3>🎮 Counter Strike (MIX)</h3>
-<p>IP: <b id="csgo-ip">45.235.98.42:27023</b> <button class="copy-btn" onclick="copyToClipboard('csgo-ip', this)">Copiar<span class="copy-message">¡Copiado!</span></button></p>
-<p>Participa en torneos y partidas rápidas.</p>
-</div>
-<div class="card">
-<h3>🟩 Minecraft Server</h3>
-<p>IP: <b id="mc-ip">lospibesdelmix.mcserver.io</b> <button class="copy-btn" onclick="copyToClipboard('mc-ip', this)">Copiar<span class="copy-message">¡Copiado!</span></button></p>
-<p>Explora y participa en eventos únicos.</p>
-</div>
-<div class="card">
-<h3>🧟 Left 4 Dead 2</h3>
-<p>Servidor exclusivo de la comunidad.</p>
-<p>Supervivencia extrema y torneos semanales.</p>
-</div>
+  <h2>Servidores</h2>
+  <div class="card"><h3>Counter Strike</h3><p>IP: 45.235.98.42:27023</p></div>
+  <div class="card"><h3>Minecraft</h3><p>IP: lospibesdelmix.mcserver.io</p></div>
 </section>
 
 <section id="anuncios">
-<h2>📢 Anuncios</h2>
-<div class="card"><h3>¡Bienvenidos!</h3><p>Los servidores ya están activos y listos para jugar.</p></div>
-<div class="card"><h3>Eventos próximos</h3><p>Torneos de Counter Strike y minijuegos de Minecraft.</p></div>
-<div class="card"><h3>Nuevas funciones</h3><p>Roles personalizados, rankings y recompensas para jugadores activos.</p></div>
+  <h2>Anuncios</h2>
+  <div class="card"><p>¡Bienvenidos! Los servidores están activos.</p></div>
 </section>
 
 <section id="reglas">
-<h2>📜 Reglas</h2>
-<div class="card">
-<h3>1️⃣ Nada de quilombos</h3><p>Venimos a divertirnos, no a generar drama. Quien no cumpla, fuera.</p>
-<h3>2️⃣ Bardo con límites ✅</h3><p>Chistes y cargadas permitidos con respeto y comunicación.</p>
-<h3>3️⃣ Respeto ante todo</h3><p>Respeta a los admins y al dueño. Problemas: hablalo cordialmente.</p>
-<h3>4️⃣ Spam solo en su lugar</h3><p>Compartí tus redes y servidores en el canal correcto sin abusar.</p>
-</div>
+  <h2>Reglas</h2>
+  <div class="card">
+    <p>1️⃣ Nada de quilombos.</p>
+    <p>2️⃣ Bardo con límites ✅.</p>
+    <p>3️⃣ Respeto ante todo.</p>
+    <p>4️⃣ Spam solo en su lugar.</p>
+  </div>
 </section>
+</main>
 
-<footer>
-<p>© 2025 Los Pibes del Mix | Comunidad Gamer</p>
-</footer>
+<footer>© 2025 Los Pibes del Mix</footer>
 
 <script>
-const switchSound=document.getElementById('switchSound');
-
-// Partículas
-window.onload=()=>{
-    const canvas=document.getElementById('particles');
-    const ctx=canvas.getContext('2d');
-    function resize(){canvas.width=window.innerWidth; canvas.height=window.innerHeight;}
-    resize(); window.addEventListener('resize', resize);
-    let particles=[]; for(let i=0;i<120;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*3+1,dx:(Math.random()-0.5)*1.2,dy:(Math.random()-0.5)*1.2});}
-    function connect(){for(let a=0;a<particles.length;a++){for(let b=a+1;b<particles.length;b++){let dx=particles[a].x-particles[b].x; let dy=particles[a].y-particles[b].y; let dist=Math.sqrt(dx*dx+dy*dy); if(dist<120){ctx.beginPath(); ctx.strokeStyle=document.body.classList.contains('light-mode')?'rgba(0,0,0,0.1)':'rgba(0,229,255,0.2)'; ctx.lineWidth=1; ctx.moveTo(particles[a].x,particles[a].y); ctx.lineTo(particles[b].x,particles[b].y); ctx.stroke();}}}}
-    function animate(){ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=document.body.classList.contains('light-mode')?'rgba(0,0,0,0.1)':'rgba(0,229,255,0.7)'; ctx.fill(); p.x+=p.dx; p.y+=p.dy; if(p.x<0||p.x>canvas.width)p.dx*=-1; if(p.y<0||p.y>canvas.height)p.dy*=-1;}); connect(); requestAnimationFrame(animate);}
-    animate();
-};
-
-// Toggle Dark/Light
-function toggleMode(){
-    document.body.classList.toggle('light-mode');
-    const btn=document.getElementById('toggleModeBtn');
-    btn.classList.add('changed');
-    setTimeout(()=>btn.classList.remove('changed'),800);
-    localStorage.setItem('theme', document.body.classList.contains('light-mode')?'light':'dark');
-    switchSound.volume=0.1; switchSound.play();
-}
-if(localStorage.getItem('theme')==='light'){document.body.classList.add('light-mode');}
-
-// Scroll animations
+// Scroll Animations
 const sections=document.querySelectorAll('section');
 const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-        if(entry.isIntersecting){
-            entry.target.classList.add('visible');
-            const link=document.querySelector(`#sidebar a[href="#${entry.target.id}"]`);
-            document.querySelectorAll('#sidebar a').forEach(a=>a.classList.remove('active'));
-            if(link) link.classList.add('active');
-            switchSound.volume=0.08; switchSound.play();
-            const cards=entry.target.querySelectorAll('.card');
-            cards.forEach((c,i)=>setTimeout(()=>c.classList.add('visible'),i*150));
-        }
-    });
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      document.querySelectorAll('#sidebar a').forEach(a=>a.classList.remove('active'));
+      const link=document.querySelector(`#sidebar a[href="#${entry.target.id}"]`);
+      if(link) link.classList.add('active');
+    }
+  });
 },{threshold:0.3});
 sections.forEach(s=>observer.observe(s));
 
-// Copiar IP
-function copyToClipboard(id,btn){
-    const text=document.getElementById(id).textContent;
-    navigator.clipboard.writeText(text).then(()=>{
-        btn.classList.add('copied');
-        setTimeout(()=>btn.classList.remove('copied'),1500);
-    });
+// Toggle Dark/Light Mode
+const toggleBtn=document.querySelector('.toggle-btn');
+const modeIndicator=document.getElementById('modeIndicator');
+function toggleMode(){
+  document.body.classList.toggle('light-mode');
+  localStorage.setItem('theme',document.body.classList.contains('light-mode')?'light':'dark');
+  updateIndicator();
 }
-
-// Menu móvil
-function toggleMenu(){document.getElementById('sidebar').classList.toggle('open');}
-function closeMenu(){document.getElementById('sidebar').classList.remove('open');}
+function updateIndicator(){
+  if(document.body.classList.contains('light-mode')){
+    modeIndicator.style.background='#1976d2';
+  }else{
+    modeIndicator.style.background='#00bcd4';
+  }
+}
+if(localStorage.getItem('theme')==='light'){document.body.classList.add('light-mode');}
+updateIndicator();
 </script>
 
 </body>
