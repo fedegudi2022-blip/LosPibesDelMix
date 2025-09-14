@@ -38,7 +38,7 @@ nav#sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 200px;
+    width: 220px;
     height: 100%;
     background: var(--sec-dark);
     display: flex;
@@ -46,8 +46,8 @@ nav#sidebar {
     align-items: center;
     padding: 2rem 1rem;
     box-shadow: 2px 0 12px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-    z-index: 10;
+    transition: transform 0.3s ease;
+    z-index: 20;
 }
 body.light-mode nav#sidebar { background: var(--sec-light); box-shadow: 2px 0 12px rgba(0,0,0,0.15); }
 
@@ -79,8 +79,24 @@ body.light-mode nav#sidebar a.active { background: var(--primary-light); color: 
 }
 body.light-mode .toggle-btn { background: var(--primary-light); color:#fff; }
 
+/* Botón menú móvil */
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: var(--primary-dark);
+    border: none;
+    padding: 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 30;
+}
+body.light-mode .menu-toggle { background: var(--primary-light); color:#fff; }
+
 /* Main */
-main { margin-left:200px; padding:2rem; transition: all 0.5s ease; }
+main { margin-left:220px; padding:2rem; transition: all 0.5s ease; }
 section { min-height:100vh; padding:4rem 2rem; opacity:0; transform: translateY(20px) scale(0.97); transition: all 0.7s ease; scroll-margin-top:60px; }
 section.visible { opacity:1; transform: translateY(0) scale(1); }
 
@@ -125,6 +141,7 @@ body.light-mode .welcome-card { background: var(--sec-light); box-shadow:0 8px 2
     display: flex;
     justify-content: center;
     gap: 1.5rem;
+    flex-wrap: wrap;
 }
 .social-links a {
     display: inline-block;
@@ -172,10 +189,16 @@ body.light-mode .copy-message { background: var(--accent-light); }
 footer { background: var(--sec-dark); padding:1rem; text-align:center; font-size:0.7rem; color:#b0bec5; margin-top:2rem; font-family:'Press Start 2P', cursive; }
 body.light-mode footer { background: var(--sec-light); color:#444; }
 
-@media(max-width:768px){
-    nav#sidebar{transform:translateX(-100%); width:200px;}
-    nav#sidebar.open{transform:translateX(0);}
-    main{margin-left:0;}
+/* --- RESPONSIVE --- */
+@media(max-width: 768px){
+    nav#sidebar{ transform: translateX(-100%); }
+    nav#sidebar.open{ transform: translateX(0); }
+    main{ margin-left:0; padding:1rem; }
+    .menu-toggle{ display:block; }
+    h2{ font-size:1.2rem; }
+    .welcome-card{ padding:2rem 1rem; }
+    .welcome-card h2{ font-size:1.5rem; }
+    .welcome-card p{ font-size:1rem; }
 }
 </style>
 </head>
@@ -183,6 +206,9 @@ body.light-mode footer { background: var(--sec-light); color:#444; }
 
 <!-- Fondo partículas -->
 <div id="particles-js"></div>
+
+<!-- Botón menú -->
+<button class="menu-toggle" id="menuToggle">☰</button>
 
 <nav id="sidebar">
     <h1>Los Pibes del Mix</h1>
@@ -256,6 +282,8 @@ navLinks.forEach(link=>{
         document.getElementById(targetId).scrollIntoView({behavior:'smooth'});
         navLinks.forEach(l=>l.classList.remove('active'));
         link.classList.add('active');
+        // cerrar menú en móvil
+        document.getElementById("sidebar").classList.remove("open");
     });
 });
 
@@ -310,6 +338,11 @@ function copyToClipboard(id, btn){
         setTimeout(()=> msg.classList.remove("show"), 1500);
     });
 }
+
+// Abrir/cerrar menú en móvil
+document.getElementById("menuToggle").addEventListener("click", ()=>{
+    document.getElementById("sidebar").classList.toggle("open");
+});
 </script>
 </body>
 </html>
